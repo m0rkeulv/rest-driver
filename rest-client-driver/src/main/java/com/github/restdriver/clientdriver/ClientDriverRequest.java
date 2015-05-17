@@ -107,6 +107,7 @@ public final class ClientDriverRequest {
     private Matcher<? extends String> bodyContentMatcher;
     private Matcher<? extends String> bodyContentType;
     private boolean anyParams;
+    private boolean someParams;
     private BodyCapture<?> bodyCapture;
     
     /**
@@ -121,6 +122,7 @@ public final class ClientDriverRequest {
         headers = new HashMap<String, Matcher<? extends String>>();
         excludedHeaders = new HashSet<String>();
         anyParams = false;
+        someParams = false;
     }
     
     /**
@@ -174,6 +176,19 @@ public final class ClientDriverRequest {
      */
     public ClientDriverRequest withAnyParams() {
         anyParams = true;
+        someParams = false;
+        return this;
+    }
+
+    /**
+     * Setter for allowing arbitrary number of querystring parameters with specified values.
+     * With this set, the any parameters  setting is  ignored.
+     *
+     * @return the request
+     */
+    public ClientDriverRequest withSomeParams() {
+        anyParams = false;
+        someParams = true;
         return this;
     }
     
@@ -289,7 +304,14 @@ public final class ClientDriverRequest {
     boolean getAnyParams() {
         return anyParams;
     }
-    
+
+    /**
+     * @return the someParams
+     */
+    boolean getSomeParams() {
+        return someParams;
+    }
+
     /**
      * toString.
      * 
@@ -305,6 +327,7 @@ public final class ClientDriverRequest {
         return "ClientDriverRequest: "
                 + method + " " + path.toString() + "; "
                 + "ANY PARAMS: " + anyParams + "; "
+                + "SOME PARAMS: " + someParams + "; "
                 + "PARAMS: [" + paramsJoined + "]; "
                 + "HEADERS: [" + headersJoined + "]; "
                 + "NOT HEADERS: [" + excludedHeadersJoined + "]; "

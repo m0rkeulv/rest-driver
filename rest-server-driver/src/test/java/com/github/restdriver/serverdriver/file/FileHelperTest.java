@@ -56,13 +56,13 @@ public class FileHelperTest {
     @Test
     public void replaceParameter() {
         String fileContent = FileHelper.fromFileWithParameters("parameter.txt").withParameter("name", "Andrew").toString();
-        assertThat(fileContent, is("Hello Andrew\nGoodbye Andrew"));
+        assertThat(fileContent, is("Hello Andrew" + System.lineSeparator() + "Goodbye Andrew"));
     }
     
     @Test
     public void replaceParameterInAscii() {
         String fileContent = FileHelper.fromFileWithParameters("parameter.txt", "ASCII").withParameter("name", "Andrew").toString();
-        assertThat(fileContent, is("Hello Andrew\nGoodbye Andrew"));
+        assertThat(fileContent, is("Hello Andrew" + System.lineSeparator() + "Goodbye Andrew"));
     }
     
     @Test

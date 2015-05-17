@@ -93,13 +93,13 @@ public final class DefaultRequestMatcher implements RequestMatcher {
         Map<String, Collection<String>> actualParams = realRequest.getParams();
         Map<String, Collection<Matcher<? extends String>>> expectedParams = expectedRequest.getParams();
         
-        if (actualParams.size() != expectedParams.size()) {
+        if (!expectedRequest.getSomeParams() && actualParams.size() != expectedParams.size()) {
             LOGGER.info("({} {}) REJECTED on number of params: expected {} != {}", realRequest.getMethod(), realRequest.getPath(), expectedParams.size(), actualParams.size());
             return false;
         }
         
         for (String expectedKey : expectedParams.keySet()) {
-            
+
             Collection<String> actualParamValues = actualParams.get(expectedKey);
             
             if (actualParamValues == null || actualParamValues.size() == 0) {

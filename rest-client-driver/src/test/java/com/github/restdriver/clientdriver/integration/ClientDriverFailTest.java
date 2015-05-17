@@ -30,6 +30,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.github.restdriver.clientdriver.ClientDriver;
@@ -204,7 +205,8 @@ public class ClientDriverFailTest {
             assertThat(bre.getMessage(), containsString("GET /test"));
         }
     }
-    
+
+    //NOTE: does not work with JDK 1.8 !?
     @Test
     public void testFailedMatchOnMultipleParameters() throws Exception {
         clientDriver = new ClientDriverFactory().createClientDriver();
